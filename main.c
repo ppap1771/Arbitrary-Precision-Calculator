@@ -6,17 +6,30 @@
 int main()
 {
 	/* Declare the pointers */
-	dll *head1, *tail1, *head2, *tail2, *headR;
+	dll *head1 = NULL, *tail1 = NULL, *head2 = NULL, *tail2 = NULL, *headR = NULL, *tailR = NULL;
 	char option, operator;
-
+	char c;
 	do
 	{
 		/* Code for reading the inputs */
 		
 		/* Function for extracting the operator */
+		printf("Enter the operation to perform:\n");
+		printf("---------------------------------------------------");
+		printf("Enter i for increment operaion.\n ");
+		printf("Enter d for decrement operaion.\n");
+		printf("Enter + for addition operaion.\n");
+		printf("Enter - for substraction operaion.\n ");
+		printf("Enter * for multiplication operaion.\n");
+		printf("Enter / for division operaion.\n ");
+		scanf(" %c",&operator);
 
 		switch (operator)
 		{
+			case 'i':
+				increment();
+			case 'd':
+				decrement();
 			case '+':
 				/* call the function to perform the addition operation */
 				break;
