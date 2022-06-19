@@ -138,3 +138,14 @@ void print_back(dll **head, dll **tail)
     }
     printf("\n");
 }
+
+/* Utility function to remove leading zeroes */
+void parse_int(dll **head, dll **tail)
+{
+    dll *temp = *head;
+    while (temp->data == 0 && temp->next != NULL)
+    {
+        pop_front(head, tail);
+        temp = temp->next;
+    }
+}
