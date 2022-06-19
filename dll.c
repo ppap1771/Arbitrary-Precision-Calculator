@@ -121,7 +121,7 @@ void print_front(dll **head, dll **tail)
     dll *temp = *head;
     while (temp != NULL)
     {
-        printf("%d ", (temp)->data);
+        printf("%d", (temp)->data);
         temp = temp->next;
     }
     printf("\n");
@@ -133,7 +133,7 @@ void print_back(dll **head, dll **tail)
     dll *temp = *tail;
     while (temp != NULL)
     {
-        printf("%d ", (temp)->data);
+        printf("%d", (temp)->data);
         temp = temp->prev;
     }
     printf("\n");
