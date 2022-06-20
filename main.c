@@ -50,7 +50,8 @@ int main()
 			increment(&head1, &tail1);
 			print_front(&head1, &tail1);
 		case 'd':
-			//(&head1, &tail1);
+			decrement(&head1, &tail1);
+			print_front(&head1, &tail1);
 		case '+':
 			/* call the function to perform the addition operation */
 			break;
