@@ -112,6 +112,34 @@ int decrement(dll **head, dll **tail)
 int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
 {
     /* Definition goes here */
+    int carry = 0, sum;
+    while (tail1 != NULL || tail2 != NULL)
+    {
+        if (tail1 != NULL && tail2 != NULL)
+        {
+            sum = (((*tail1)->data) + ((*tail2)->data) + carry) % 10;
+            carry = (((*tail1)->data) + ((*tail2)->data) + carry) / 10;
+            (*tail1) = (*tail1)->prev;
+            (*tail2) = (*tail2)->prev;
+        }
+        else if ((*tail1) == NULL && (*tail2) != NULL)
+        {
+            sum = ((*tail2)->data + carry) % 10;
+            carry = ((*tail2)->data + carry) / 10;
+            (*tail2) = (*tail2)->prev;
+        }
+        else if ((*tail2) == NULL && (*tail1) != NULL)
+        {
+            sum = ((*tail1)->data + carry) % 10;
+            carry = ((*tail1)->data + carry) / 10;
+            (*tail1) = (*tail1)->prev;
+        }
+        push_front(headR, tailR, sum);
+    }
+    if (carry != 0)
+    {
+        push_front(headR, tailR, carry);
+    }
 }
 
 int substraction(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)

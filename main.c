@@ -28,7 +28,7 @@ int main()
 		printf("Enter - for substraction operaion.\n");
 		printf("Enter * for multiplication operaion.\n");
 		printf("Enter / for division operaion.\n");
-		printf("---------------------------------------------------");
+		printf("---------------------------------------------------\n");
 		scanf(" %c", &operator);
 
 		switch (operator)
@@ -45,6 +45,7 @@ int main()
 			/* call the function to perform the addition operation */
 			printf("Enter the number: ");
 			input(&head2, &tail2);
+			// parse_int(&head2, &tail2);
 			addition(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 			break;
 		case '-':
