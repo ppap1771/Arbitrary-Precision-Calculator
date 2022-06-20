@@ -155,6 +155,19 @@ void input(dll **head, dll **tail)
 {
     int flag = 0;
     char c;
+    scanf(" %c", &c);
+    if (c == '-')
+        flag++;
+    else
+    {
+        if (flag == 1)
+        {
+            push_back(head, tail, -(((int)c) - 48));
+            flag++;
+        }
+        else
+            push_back(head, tail, ((int)c) - 48);
+    }
     while (1)
     {
         scanf("%c", &c);
