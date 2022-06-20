@@ -50,17 +50,26 @@ int main()
 			break;
 		case '-':
 			/* call the function to perform the subtraction operation */
+			printf("Enter the number: ");
+			input(&head2, &tail2);
+			substraction(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 			break;
 		case '*':
 			/* call the function to perform the multiplication operation */
+			printf("Enter the number: ");
+			input(&head2, &tail2);
+			multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 			break;
 		case '/':
 			/* call the function to perform the division operation */
+			printf("Enter the number: ");
+			input(&head2, &tail2);
+			division(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 			break;
 		default:
 			printf("Invalid Input:-( Try again...\n");
 		}
-		printf("Want to continue? Press [yY | nN]: ");
+		printf("Want to continue? Press [y or Y | n or N]: ");
 		scanf(" %c", &option);
 	} while (option == 'y' || option == 'Y');
 
