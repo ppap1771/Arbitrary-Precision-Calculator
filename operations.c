@@ -113,26 +113,28 @@ int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dl
 {
     /* Definition goes here */
     int carry = 0, sum;
-    while (tail1 != NULL || tail2 != NULL)
+    dll *t1 = *tail1 ;
+    dll *t2 = *tail2 ;
+    while (t1 != NULL || t2 != NULL)
     {
-        if (tail1 != NULL && tail2 != NULL)
+        if (t1 != NULL && tail2 != NULL)
         {
-            sum = (((*tail1)->data) + ((*tail2)->data) + carry) % 10;
-            carry = (((*tail1)->data) + ((*tail2)->data) + carry) / 10;
-            (*tail1) = (*tail1)->prev;
-            (*tail2) = (*tail2)->prev;
+            sum = ((t1->data) + (t2->data) + carry) % 10;
+            carry = ((t1->data) + (t2->data) + carry) / 10;
+            t1 = t1->prev;
+            t2 = t2->prev;
         }
-        else if ((*tail1) == NULL && (*tail2) != NULL)
+        else if (t1 == NULL && t2 != NULL)
         {
-            sum = ((*tail2)->data + carry) % 10;
-            carry = ((*tail2)->data + carry) / 10;
-            (*tail2) = (*tail2)->prev;
+            sum = (t2->data + carry) % 10;
+            carry = (t2->data + carry) / 10;
+            t2 = t2->prev;
         }
-        else if ((*tail2) == NULL && (*tail1) != NULL)
+        else if (t2 == NULL && t1 != NULL)
         {
-            sum = ((*tail1)->data + carry) % 10;
-            carry = ((*tail1)->data + carry) / 10;
-            (*tail1) = (*tail1)->prev;
+            sum = (t1->data + carry) % 10;
+            carry = (t1->data + carry) / 10;
+            t1 = t1->prev;
         }
         push_front(headR, tailR, sum);
     }
@@ -140,6 +142,7 @@ int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dl
     {
         push_front(headR, tailR, carry);
     }
+    print_front(headR,tailR);
 }
 
 int substraction(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
