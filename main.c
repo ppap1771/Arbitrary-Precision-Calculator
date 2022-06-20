@@ -36,11 +36,10 @@ int main()
 		case 'i':
 			increment(&head1, &tail1);
 			print_front(&head1, &tail1);
+			break;
 		case 'd':
-			//(&head1, &tail1);
-			printf("Enter the number: ");
-			input(&head2, &tail2);
-			
+			decrement(&head1, &tail1);
+			print_front(&head1, &tail1);
 			break;
 		case '+':
 			/* call the function to perform the addition operation */
