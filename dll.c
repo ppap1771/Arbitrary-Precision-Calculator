@@ -149,3 +149,28 @@ void parse_int(dll **head, dll **tail)
         temp = temp->next;
     }
 }
+
+/* Utility function for taking big number input */
+void input(dll **head, dll **tail)
+{
+    int flag = 0;
+    char c;
+    while (1)
+    {
+        scanf("%c", &c);
+        if (c == '\n')
+            break;
+        if (c == '-')
+            flag++;
+        else
+        {
+            if (flag == 1)
+            {
+                push_back(head, tail, -(((int)c) - 48));
+                flag++;
+            }
+            else
+                push_back(head, tail, ((int)c) - 48);
+        }
+    }
+}

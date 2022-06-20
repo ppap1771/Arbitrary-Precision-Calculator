@@ -6,32 +6,18 @@
 int main()
 {
 	/* Declare the pointers */
-	dll *head1 = NULL, *tail1 = NULL, *head2 = NULL, *tail2 = NULL, *headR = NULL, *tailR = NULL;
-	char option, operator, c;
-	int flag = 0;
+	dll *head1 = NULL, *tail1 = NULL;
+	char option, operator;
+
+	/* Code for reading the inputs */
+	printf("Enter the number: ");
+	input(&head1, &tail1);
+	parse_int(&head1, &tail1);
+
 	do
 	{
-		/* Code for reading the inputs */
-		printf("Enter the number: ");
-		while (1)
-		{
-			scanf("%c", &c);
-			if (c == '\n')
-				break;
-			if (c == '-')
-				flag++;
-			else
-			{
-				if (flag == 1)
-				{
-					push_back(&head1, &tail1, -(((int)c) - 48));
-					flag++;
-				}
-				else
-					push_back(&head1, &tail1, ((int)c) - 48);
-			}
-		}
-		parse_int(&head1, &tail1);
+		/* Declare the pointers */
+		dll *head2 = NULL, *tail2 = NULL, *headR = NULL, *tailR = NULL;
 
 		/* Function for extracting the operator */
 		printf("Enter the operation to perform:\n");
@@ -42,6 +28,7 @@ int main()
 		printf("Enter - for substraction operaion.\n");
 		printf("Enter * for multiplication operaion.\n");
 		printf("Enter / for division operaion.\n");
+		printf("---------------------------------------------------");
 		scanf(" %c", &operator);
 
 		switch (operator)
@@ -49,11 +36,16 @@ int main()
 		case 'i':
 			increment(&head1, &tail1);
 			print_front(&head1, &tail1);
+			break;
 		case 'd':
 			decrement(&head1, &tail1);
 			print_front(&head1, &tail1);
+			break;
 		case '+':
 			/* call the function to perform the addition operation */
+			printf("Enter the number: ");
+			input(&head2, &tail2);
+			addition(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 			break;
 		case '-':
 			/* call the function to perform the subtraction operation */
