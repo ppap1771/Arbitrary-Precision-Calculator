@@ -113,8 +113,8 @@ int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dl
 {
     /* Definition goes here */
     int carry = 0, sum;
-    dll *t1 = *tail1 ;
-    dll *t2 = *tail2 ;
+    dll *t1 = *tail1;
+    dll *t2 = *tail2;
     while (t1 != NULL || t2 != NULL)
     {
         if (t1 != NULL && tail2 != NULL)
@@ -142,13 +142,112 @@ int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dl
     {
         push_front(headR, tailR, carry);
     }
-    print_front(headR,tailR);
+    print_front(headR, tailR);
 }
 
 int substraction(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
 {
     /* Definition goes here */
-    int borrow = 0;
+    int l1, l2;
+    l1 = count(*head1, *tail1);
+    l2 = count(*head2, *tail2);
+    int borrow = 0, diff;
+    int flag = 0;
+    dll *t1 = *tail1;
+    dll *t2 = *tail2;
+
+    while (t1 != NULL || t2 != NULL)
+    {
+        // if (l1 >= l2)
+        // {
+        flag = 0;
+        if (t1 != NULL && t2 != NULL)
+        {
+            if ((t1->data) + borrow >= (t2->data))
+            {
+                diff = ((t1->data) + borrow - (t2->data));
+                borrow = 0;
+            }
+            else
+            {
+                diff = ((t1->data) + borrow + 10 - (t2->data));
+                borrow = -1;
+            }
+            t1 = t1->prev;
+            t2 = t2->prev;
+        }
+        else if (t1 != NULL && t2 == NULL)
+        {
+            if (t1->data >= 1)
+            {
+                diff = t1->data + borrow;
+                borrow = 0;
+            }
+            else
+            {
+                if (borrow != 0)
+                {
+                    diff = t1->data + 10 + borrow;
+                    borrow = -1;
+                }
+                else
+                {
+                    diff = t1->data;
+                }
+                t1 = t1->prev;
+            }
+        }
+        push_front(headR, tailR, diff);
+        // }
+        // else
+        // {
+        //     flag = 1;
+        //     if (t1 != NULL && t2 != NULL)
+        //     {
+        //         if ((t2->data) + borrow >= (t1->data))
+        //         {
+        //             diff = ((t2->data) + borrow - (t1->data));
+        //             borrow = 0;
+        //         }
+        //         else
+        //         {
+        //             diff = ((t2->data) + borrow + 10 - (t1->data));
+        //             borrow = -1;
+        //         }
+        //         t1 = t1->prev;
+        //         t2 = t2->prev;
+        //     }
+        //     else if (t2 != NULL && t1 == NULL)
+        //     {
+        //         if (t2->data >= 1)
+        //         {
+        //             diff = t2->data + borrow;
+        //             borrow = 0;
+        //         }
+        //         else
+        //         {
+        //             if (borrow != 0)
+        //             {
+        //                 diff = t2->data + 10 + borrow;
+        //                 borrow = -1;
+        //             }
+        //             else
+        //             {
+        //                 diff = t2->data;
+        //             }
+        //             t2 = t2->prev;
+        //         }
+        //     }
+        //     push_front(headR, tailR, diff);
+        // }
+    }
+    // if (flag == 0)
+    print_front(headR, tailR);
+    // if (flag == 1)
+    // {
+    //     printf("-");
+    //     print_front(headR, tailR);
+    // }
 }
 
 int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)

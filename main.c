@@ -45,6 +45,7 @@ int main()
 			/* call the function to perform the addition operation */
 			printf("Enter the number: ");
 			input(&head2, &tail2);
+			// printf("%d %d \n",count(head1, tail1),count(head2, tail2));
 			// parse_int(&head2, &tail2);
 			addition(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 			break;

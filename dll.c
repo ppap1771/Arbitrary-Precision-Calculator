@@ -187,3 +187,15 @@ void input(dll **head, dll **tail)
         }
     }
 }
+
+/* Function to get the number of digits in the big-number input */
+int count(dll *head, dll *tail)
+{
+    int len = 0;
+    while (head != NULL)
+    {
+        len++;
+        head = head->next;
+    }
+    return len;
+}
