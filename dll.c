@@ -199,3 +199,25 @@ int count(dll *head, dll *tail)
     }
     return len;
 }
+
+/* Utility function to clear linked list */
+void clear(dll **head, dll **tail)
+{
+    while (*head != NULL)
+    {
+        dll *temp = (*head)->next;
+        free(*head);
+        *head = temp;
+    }
+}
+
+/* Utility function to copy elements of linked list to the end of another linked list */
+void extend(dll **headc, dll **tailc, dll **headp, dll **tailp)
+{
+    dll *temp = *headc;
+    while(temp != NULL)
+    {
+        push_back(headp, tailp, temp->data);
+        temp = temp->next;
+    }
+}
