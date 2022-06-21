@@ -112,12 +112,12 @@ int decrement(dll **head, dll **tail)
 int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
 {
     /* Definition goes here */
+    dll *t1 = *tail1;
+    dll *t2 = *tail2;
     int carry = 0, sum;
-    dll *t1 = *tail1 ;
-    dll *t2 = *tail2 ;
     while (t1 != NULL || t2 != NULL)
     {
-        if (t1 != NULL && tail2 != NULL)
+        if (t1 != NULL && t2 != NULL)
         {
             sum = ((t1->data) + (t2->data) + carry) % 10;
             carry = ((t1->data) + (t2->data) + carry) / 10;
@@ -142,7 +142,6 @@ int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dl
     {
         push_front(headR, tailR, carry);
     }
-    print_front(headR,tailR);
 }
 
 int substraction(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
@@ -153,7 +152,40 @@ int substraction(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR
 
 int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
 {
-    /* Definition goes here */
+    dll *h1 = *head1, *h2 = *head2, *t1 = *tail1, *ansH = NULL, *ansT = NULL;
+    push_back(&ansH, &ansT, 0);
+    push_back(headR, tailR, 0);
+    int shift = 0;
+    
+    /* Sign of answer */
+    int sign = (((*head1)->data)/abs((*head1)->data))*(((*head2)->data)/abs((*head2)->data));
+    (*head1)->data = abs((*head1)->data);
+    (*head2)->data = abs((*head2)->data);
+
+    while (t1 != NULL)
+    {
+        int carry = 0;
+        dll *t2 = *tail2, *tempH = NULL, *tempT = NULL;
+        clear(headR, tailR);
+        while (t2 != NULL)
+        {
+            push_front(&tempH, &tempT, ((t2->data*t1->data)+carry)%10);
+            carry = (t2->data*t1->data)/10;
+            t2 = t2->prev;
+        }
+        if (carry)
+            push_front(&tempH, &tempT, carry);
+        for (int i = 0; i < shift; i++)
+            push_back(&tempH, &tempT, 0);
+        addition(&tempH, &tempT, &ansH, &ansT, headR, tailR);
+        clear(&ansH, &ansT);
+        extend(headR, tailR, &ansH, &ansT);
+        t1 = t1->prev;
+        shift++;
+    }
+    (*headR)->data *= sign;
+    print_front(headR, tailR);
+    return EXIT_SUCCESS;
 }
 
 int division(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
