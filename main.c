@@ -63,6 +63,7 @@ int main()
 		switch (operator)
 		{
 		case 'i':
+			/* Increment operation */
 			/* Code for reading the inputs */
 			printf("Enter the number: ");
 			input(&head1, &tail1);
@@ -71,6 +72,7 @@ int main()
 			print_front(&head1, &tail1);
 			break;
 		case 'd':
+			/* Modulo operation */
 			/* Code for reading the inputs */
 			printf("Enter the number: ");
 			input(&head1, &tail1);
@@ -79,7 +81,7 @@ int main()
 			print_front(&head1, &tail1);
 			break;
 		case '+':
-			/* call the function to perform the addition operation */
+			/* Addition operation */
 			/* Code for reading the inputs */
 			printf("Enter the number: ");
 			input(&head1, &tail1);
@@ -91,7 +93,7 @@ int main()
 			print_front(&headR, &tailR);
 			break;
 		case '-':
-			/* call the function to perform the subtraction operation */
+			/* Subtraction operation */
 			/* Code for reading the inputs */
 			printf("Enter the number: ");
 			input(&head1, &tail1);
@@ -103,7 +105,7 @@ int main()
 			print_front(&headR, &tailR);
 			break;
 		case '*':
-			/* call the function to perform the multiplication operation */
+			/* Multiplication operation */
 			/* Code for reading the inputs */
 			printf("Enter the number: ");
 			input(&head1, &tail1);
@@ -115,7 +117,7 @@ int main()
 			print_front(&headR, &tailR);
 			break;
 		case '/':
-			/* call the function to perform the division operation */
+			/* Division operation */
 			/* Code for reading the inputs */
 			printf("Enter the number: ");
 			input(&head1, &tail1);
@@ -127,7 +129,7 @@ int main()
 			print_front(&headR, &tailR);
 			break;
 		case '%':
-			/* call the function to perform the modulo operation */
+			/* Modulo operation */
 			/* Code for reading the inputs */
 			printf("Enter the number: ");
 			input(&head1, &tail1);
