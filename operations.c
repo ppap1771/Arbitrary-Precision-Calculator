@@ -255,9 +255,9 @@ int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **hea
     push_back(&ansH, &ansT, 0);
     push_back(headR, tailR, 0);
     int shift = 0;
-    
+
     /* Sign of answer */
-    int sign = (((*head1)->data)/abs((*head1)->data))*(((*head2)->data)/abs((*head2)->data));
+    int sign = (((*head1)->data) / abs((*head1)->data)) * (((*head2)->data) / abs((*head2)->data));
     (*head1)->data = abs((*head1)->data);
     (*head2)->data = abs((*head2)->data);
 
@@ -268,8 +268,8 @@ int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **hea
         clear(headR, tailR);
         while (t2 != NULL)
         {
-            push_front(&tempH, &tempT, ((t2->data*t1->data)+carry)%10);
-            carry = (t2->data*t1->data)/10;
+            push_front(&tempH, &tempT, ((t2->data * t1->data) + carry) % 10);
+            carry = (t2->data * t1->data) / 10;
             t2 = t2->prev;
         }
         if (carry)
@@ -289,5 +289,46 @@ int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **hea
 
 int division(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
 {
-    /* Definition goes here */
+    /* Sign of answer */
+    int sign = (((*head1)->data) / abs((*head1)->data)) * (((*head2)->data) / abs((*head2)->data));
+    (*head1)->data = abs((*head1)->data);
+    (*head2)->data = abs((*head2)->data);
+
+    push_back(headR, tailR, 0);
+
+    dll *tempH = NULL, *tempT = NULL;
+    extend(head2, tail2, &tempH, &tempT);
+
+    while (compare(*head1, *tail1, *head2, *tail2) == -1)
+    {
+        dll *temp2H = NULL, *temp2T = NULL;
+        extend(head2, tail2, &temp2H, &temp2T);
+        clear(head2, tail2);
+        addition(&tempH, &tempT, &temp2H, &temp2T, head2, tail2);
+        increment(headR, tailR);
+    }
+
+    if (compare(*head1, *tail1, *head2, *tail2) == 0)
+        increment(headR, tailR);
+
+    (*headR)->data *= sign;
+    return EXIT_SUCCESS;
+}
+
+int modulo(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
+{
+    if ((*head1)->data < 0 || (*head2)->data < 0)
+    {
+        fprintf(stderr, RED "[ERROR]" NC ": Modulo operator requires positive operands! \n");
+        return EXIT_FAILURE;
+    }
+    extend(head1, tail1, headR, tailR);
+    if (compare(*headR, *tailR, *head2, *tail2) == -1)
+    {
+        dll *tempH = NULL, *tempT = NULL;
+        extend(headR, tailR, &tempH, &tempT);
+        clear(headR, tailR);
+        substraction(&tempH, &tempT, head2, tail2, headR, tailR);
+    }
+    return EXIT_SUCCESS;
 }

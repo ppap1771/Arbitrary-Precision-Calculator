@@ -28,6 +28,7 @@ int main()
 		printf("Enter - for substraction operaion.\n");
 		printf("Enter * for multiplication operaion.\n");
 		printf("Enter / for division operaion.\n");
+		printf("Enter %% for modulo operaion.\n");
 		printf("---------------------------------------------------\n");
 		scanf(" %c", &operator);
 
@@ -48,24 +49,35 @@ int main()
 			// printf("%d %d \n",count(head1, tail1),count(head2, tail2));
 			// parse_int(&head2, &tail2);
 			addition(&head1, &tail1, &head2, &tail2, &headR, &tailR);
+			print_front(&headR, &tailR);
 			break;
 		case '-':
 			/* call the function to perform the subtraction operation */
 			printf("Enter the number: ");
 			input(&head2, &tail2);
 			substraction(&head1, &tail1, &head2, &tail2, &headR, &tailR);
+			print_front(&headR, &tailR);
 			break;
 		case '*':
 			/* call the function to perform the multiplication operation */
 			printf("Enter the number: ");
 			input(&head2, &tail2);
 			multiplication(&head1, &tail1, &head2, &tail2, &headR, &tailR);
+			print_front(&headR, &tailR);
 			break;
 		case '/':
 			/* call the function to perform the division operation */
 			printf("Enter the number: ");
 			input(&head2, &tail2);
 			division(&head1, &tail1, &head2, &tail2, &headR, &tailR);
+			print_front(&headR, &tailR);
+			break;
+		case '%':
+			/* call the function to perform the modulo operation */
+			printf("Enter the number: ");
+			input(&head2, &tail2);
+			modulo(&head1, &tail1, &head2, &tail2, &headR, &tailR);
+			print_front(&headR, &tailR);
 			break;
 		default:
 			printf("Invalid Input:-( Try again...\n");
