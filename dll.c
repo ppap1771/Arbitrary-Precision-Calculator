@@ -57,8 +57,6 @@ void push_front(dll **head, dll **tail, int data)
         fprintf(stderr, RED "[ERROR]" NC ": Overflow! \n");
         exit(EXIT_FAILURE);
     }
-    
-    /* Initializing value to the node */
     node->prev = NULL;
     node->data = data;
     node->next = NULL;
