@@ -30,6 +30,8 @@ void push_back(dll **head, dll **tail, int data)
         fprintf(stderr, RED "[ERROR]" NC ": Overflow! \n");
         exit(EXIT_FAILURE);
     }
+
+    /* Initializing value to the node */
     node->prev = NULL;
     node->data = data;
     node->next = NULL;
@@ -55,6 +57,8 @@ void push_front(dll **head, dll **tail, int data)
         fprintf(stderr, RED "[ERROR]" NC ": Overflow! \n");
         exit(EXIT_FAILURE);
     }
+    
+    /* Initializing value to the node */
     node->prev = NULL;
     node->data = data;
     node->next = NULL;
@@ -215,7 +219,7 @@ void clear(dll **head, dll **tail)
 void extend(dll **headc, dll **tailc, dll **headp, dll **tailp)
 {
     dll *temp = *headc;
-    while(temp != NULL)
+    while (temp != NULL)
     {
         push_back(headp, tailp, temp->data);
         temp = temp->next;
