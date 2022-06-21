@@ -223,3 +223,26 @@ void extend(dll **headc, dll **tailc, dll **headp, dll **tailp)
         temp = temp->next;
     }
 }
+
+/* Utility function to compare numbers */
+int compare(dll *headL, dll *tailL, dll *headR, dll *tailR)
+{
+    int L = count(headL, tailL), R = count(headR, tailR);
+    if (L > R)
+        return -1;
+    else if (L < R)
+        return 1;
+    else
+    {
+        while (headL != NULL && headR != NULL)
+        {
+            if (headL->data > headR->data)
+                return -1;
+            else if (headL->data < headR->data)
+                return 1;
+            headL = headL->next;
+            headR = headR->next;
+        }
+        return 0;
+    }
+}
