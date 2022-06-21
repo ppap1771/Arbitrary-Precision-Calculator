@@ -146,107 +146,66 @@ int addition(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dl
 
 int substraction(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
 {
-    /* Definition goes here */
-    int l1, l2;
-    l1 = count(*head1, *tail1);
-    l2 = count(*head2, *tail2);
-    int borrow = 0, diff;
-    int flag = 0;
-    dll *t1 = *tail1;
-    dll *t2 = *tail2;
-
-    while (t1 != NULL || t2 != NULL)
+    int flag = compare(*head1, *tail1, *head2, *tail2), borrow = 0;
+    if (flag == 0)
     {
-        // if (l1 >= l2)
-        // {
-        flag = 0;
-        if (t1 != NULL && t2 != NULL)
-        {
-            if ((t1->data) + borrow >= (t2->data))
-            {
-                diff = ((t1->data) + borrow - (t2->data));
-                borrow = 0;
-            }
-            else
-            {
-                diff = ((t1->data) + borrow + 10 - (t2->data));
-                borrow = -1;
-            }
-            t1 = t1->prev;
-            t2 = t2->prev;
-        }
-        else if (t1 != NULL && t2 == NULL)
-        {
-            if (t1->data >= 1)
-            {
-                diff = t1->data + borrow;
-                borrow = 0;
-            }
-            else
-            {
-                if (borrow != 0)
-                {
-                    diff = t1->data + 10 + borrow;
-                    borrow = -1;
-                }
-                else
-                {
-                    diff = t1->data;
-                }
-                t1 = t1->prev;
-            }
-        }
-        push_front(headR, tailR, diff);
-        // }
-        // else
-        // {
-        //     flag = 1;
-        //     if (t1 != NULL && t2 != NULL)
-        //     {
-        //         if ((t2->data) + borrow >= (t1->data))
-        //         {
-        //             diff = ((t2->data) + borrow - (t1->data));
-        //             borrow = 0;
-        //         }
-        //         else
-        //         {
-        //             diff = ((t2->data) + borrow + 10 - (t1->data));
-        //             borrow = -1;
-        //         }
-        //         t1 = t1->prev;
-        //         t2 = t2->prev;
-        //     }
-        //     else if (t2 != NULL && t1 == NULL)
-        //     {
-        //         if (t2->data >= 1)
-        //         {
-        //             diff = t2->data + borrow;
-        //             borrow = 0;
-        //         }
-        //         else
-        //         {
-        //             if (borrow != 0)
-        //             {
-        //                 diff = t2->data + 10 + borrow;
-        //                 borrow = -1;
-        //             }
-        //             else
-        //             {
-        //                 diff = t2->data;
-        //             }
-        //             t2 = t2->prev;
-        //         }
-        //     }
-        //     push_front(headR, tailR, diff);
-        // }
+        push_back(headR, tailR, 0);
+        return EXIT_SUCCESS;
     }
-    // if (flag == 0)
-    print_front(headR, tailR);
-    // if (flag == 1)
-    // {
-    //     printf("-");
-    //     print_front(headR, tailR);
-    // }
+    else if (flag == -1)
+    {
+        dll *tempH = *head1, *tempT = *tail1, *tempH2 = *head2, *tempT2 = *tail2;
+        while (tempT != NULL)
+        {
+            int minus;
+            if (tempT2 != NULL)
+                minus = tempT2->data;
+            else
+                minus = 0;
+            if ((tempT->data - borrow) < minus)
+            {
+                push_front(headR, tailR, (tempT->data + 10 - borrow - minus));
+                borrow = 1;
+            }
+            else
+            {
+                push_front(headR, tailR, (tempT->data - borrow - minus));
+                borrow = 0;
+            }
+            tempT = tempT->prev;
+            if (tempT2 != NULL)
+                tempT2 = tempT2->prev;
+        }
+        parse_int(headR, tailR);
+    }
+    else
+    {
+        dll *tempH = *head2, *tempT = *tail2, *tempH2 = *head1, *tempT2 = *tail1;
+        while (tempT != NULL)
+        {
+            int minus;
+            if (tempT2 != NULL)
+                minus = tempT2->data;
+            else
+                minus = 0;
+            if ((tempT->data - borrow) < minus)
+            {
+                push_front(headR, tailR, (tempT->data + 10 - borrow - minus));
+                borrow = 1;
+            }
+            else
+            {
+                push_front(headR, tailR, (tempT->data - borrow - minus));
+                borrow = 0;
+            }
+            tempT = tempT->prev;
+            if (tempT2 != NULL)
+                tempT2 = tempT2->prev;
+        }
+        parse_int(headR, tailR);
+        (*headR)->data = -((*headR)->data);
+    }
+    return EXIT_SUCCESS;
 }
 
 int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
@@ -323,7 +282,7 @@ int modulo(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll 
         return EXIT_FAILURE;
     }
     extend(head1, tail1, headR, tailR);
-    if (compare(*headR, *tailR, *head2, *tail2) == -1)
+    while (compare(*headR, *tailR, *head2, *tail2) <= 0)
     {
         dll *tempH = NULL, *tempT = NULL;
         extend(headR, tailR, &tempH, &tempT);
