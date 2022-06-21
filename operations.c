@@ -247,6 +247,16 @@ int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **hea
 
 int division(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **headR, dll **tailR)
 {
+    dll *zeroH = NULL, *zeroT = NULL;
+    push_back(&zeroH, &zeroT, 0);
+
+    /* Checking if divisor is zero */
+    if (compare(*head2, *tail2, zeroH, zeroT) == 0)
+    {
+        fprintf(stderr, RED "[ERROR]" NC ": Divisor must not be zero! \n");
+        return EXIT_FAILURE;
+    }
+
     /* Sign of answer */
     int sign = (((*head1)->data) / abs((*head1)->data)) * (((*head2)->data) / abs((*head2)->data));
     (*head1)->data = abs((*head1)->data);
