@@ -242,7 +242,6 @@ int multiplication(dll **head1, dll **tail1, dll **head2, dll **tail2, dll **hea
         shift++;
     }
     (*headR)->data *= sign;
-    print_front(headR, tailR);
     return EXIT_SUCCESS;
 }
 

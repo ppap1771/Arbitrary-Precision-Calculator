@@ -1,33 +1,63 @@
+/*
+ █████╗ ██████╗ ██████╗ ██╗████████╗██████╗  █████╗ ██████╗ ██╗   ██╗
+██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝
+███████║██████╔╝██████╔╝██║   ██║   ██████╔╝███████║██████╔╝ ╚████╔╝
+██╔══██║██╔══██╗██╔══██╗██║   ██║   ██╔══██╗██╔══██║██╔══██╗  ╚██╔╝
+██║  ██║██║  ██║██████╔╝██║   ██║   ██║  ██║██║  ██║██║  ██║   ██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
+
+██████╗ ██████╗ ███████╗ ██████╗██╗███████╗██╗ ██████╗ ███╗   ██╗
+██╔══██╗██╔══██╗██╔════╝██╔════╝██║██╔════╝██║██╔═══██╗████╗  ██║
+██████╔╝██████╔╝█████╗  ██║     ██║███████╗██║██║   ██║██╔██╗ ██║
+██╔═══╝ ██╔══██╗██╔══╝  ██║     ██║╚════██║██║██║   ██║██║╚██╗██║
+██║     ██║  ██║███████╗╚██████╗██║███████║██║╚██████╔╝██║ ╚████║
+╚═╝     ╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+
+ ██████╗ █████╗ ██╗      ██████╗██╗   ██╗██╗      █████╗ ████████╗ ██████╗ ██████╗
+██╔════╝██╔══██╗██║     ██╔════╝██║   ██║██║     ██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗
+██║     ███████║██║     ██║     ██║   ██║██║     ███████║   ██║   ██║   ██║██████╔╝
+██║     ██╔══██║██║     ██║     ██║   ██║██║     ██╔══██║   ██║   ██║   ██║██╔══██╗
+╚██████╗██║  ██║███████╗╚██████╗╚██████╔╝███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║
+ ╚═════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+*/
+
 /* Including header files */
 #include <stdio.h>
 #include <stdlib.h>
 #include "operations.c"
 
+void help()
+{
+	printf("+--------------------------------+\n");
+	printf("|           Operations           |\n");
+	printf("+--------------------------------+\n");
+	printf("| i | Increment                  | \n");
+	printf("| d | Decrement                  |\n");
+	printf("| + | Addition                   |\n");
+	printf("| - | Substraction               |\n");
+	printf("| * | Multiplication             |\n");
+	printf("| / | Division                   |\n");
+	printf("| %% | Modulo                     |\n");
+	printf("| h | Displays this table        |\n");
+	printf("+--------------------------------+\n");
+}
+
 int main()
 {
 	/* Declare the pointers */
-	dll *head1 = NULL, *tail1 = NULL;
 	char option, operator;
 
-	parse_int(&head1, &tail1);
+	printf(BLU "+================================+\n" NC);
+	printf(BLU "| Arbitrary Precision Calculator |\n" NC);
+	printf(BLU "+================================+\n" NC);
 
+	help();
 	do
 	{
 		/* Declare the pointers */
-		dll *head2 = NULL, *tail2 = NULL, *headR = NULL, *tailR = NULL;
+		dll *head1 = NULL, *tail1 = NULL, *head2 = NULL, *tail2 = NULL, *headR = NULL, *tailR = NULL;
 
-		/* Function for extracting the operator */
-		printf("+--------------------------------------------------+\n");
-		printf("|       Enter the operation to perform:            |\n");
-		printf("|---------------------------------------------------|\n");
-		printf("| 1.  |Enter i for increment operaion.             | \n");
-		printf("| 2.  |Enter d for decrement operaion.             |\n");
-		printf("| 3.  |Enter + for addition operaion.              |\n");
-		printf("| 4.  |Enter - for substraction operaion.          |\n");
-		printf("| 5.  |Enter * for multiplication operaion.        |\n");
-		printf("| 6.  |Enter / for division operaion.              |\n");
-		printf("| 7.  |Enter %% for modulo operaion.               |\n");
-		printf("+--------------------------------------------------+\n");
+		printf("Enter your choice: ");
 		scanf(" %c", &operator);
 
 		switch (operator)
@@ -108,11 +138,15 @@ int main()
 			modulo(&head1, &tail1, &head2, &tail2, &headR, &tailR);
 			print_front(&headR, &tailR);
 			break;
+		case 'h':
+			help();
+			break;
 		default:
 			printf("Invalid Input:-( Try again...\n");
 		}
-		printf("Want to continue? Press [y or Y | n or N]: ");
+		printf("Want to continue? (y/n): ");
 		scanf(" %c", &option);
+		printf("\n");
 	} while (option == 'y' || option == 'Y');
 
 	return 0;
